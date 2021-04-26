@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>naive todo</title>
+  </head>
+  <body>
+    <h1>TODO LIST</h1>
+    <form onsubmit="handleFormSubmit(); return false">
+      <input id="task-input" />
+      <button>登録する</button>
+    </form>
+    <ul id="todos"></ul>
+
+    <script src="index.js"></script>
+  </body>
+</html>
