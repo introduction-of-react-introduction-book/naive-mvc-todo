@@ -1,8 +1,8 @@
-# naive-todo
+# naive-state-todo
 
-TODO リストをナイーブに実装
+TODO リストを state を使いながらナイーブに実装
 
-https://sadnessojisan.github.io/naive-todo/
+https://sadnessojisan.github.io/naive-state-todo/
 
 ## dev
 
