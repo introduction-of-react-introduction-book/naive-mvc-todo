@@ -13,13 +13,21 @@ class TodoListModel {
    */
   addTodo(task) {
     this.idCounter += 1;
-    this.todos.set(this.idCounter, { id: this.idCounter, task });
+    this.todos.set(this.idCounter, {
+      id: this.idCounter,
+      task,
+      checked: false,
+    });
     return this.idCounter;
   }
 
   removeTodo() {}
 
-  checkTodo() {}
+  checkTodo(id, isCheck) {
+    const todo = this.todos.get(id);
+    todo.checked = isCheck;
+    return todo;
+  }
 
   getTodos() {
     return Array.from(this.todos.values());
@@ -121,10 +129,11 @@ class Controller {
     const checkBoxEl = document.getElementById(`checkbox-${id}`);
     checkBoxEl.onchange = function (e) {
       const checked = e.target.checked;
-      if (checked) {
-        view.check(id);
+      const stateChangedTodo = todoList.checkTodo(id, checked);
+      if (stateChangedTodo.checked) {
+        view.check(stateChangedTodo.id);
       } else {
-        view.unCheck(id);
+        view.unCheck(stateChangedTodo.id);
       }
     };
   }
