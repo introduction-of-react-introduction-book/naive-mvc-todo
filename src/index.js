@@ -1,5 +1,3 @@
-const todos = {};
-
 class TodoListModel {
   constructor() {
     this.idCounter = 0;
@@ -21,16 +19,14 @@ class TodoListModel {
     return this.idCounter;
   }
 
-  removeTodo() {}
+  removeTodo(id) {
+    this.todos.delete(id);
+  }
 
   checkTodo(id, isCheck) {
     const todo = this.todos.get(id);
     todo.checked = isCheck;
     return todo;
-  }
-
-  getTodos() {
-    return Array.from(this.todos.values());
   }
 
   getTodo(id) {
@@ -41,8 +37,6 @@ class TodoListModel {
 const todoList = new TodoListModel();
 
 class View {
-  render(todos) {}
-
   /**
    *
    * @param {id: number, task: string} todo
@@ -68,6 +62,11 @@ class View {
   resetTodo() {
     const input = document.getElementById("task-input");
     input.value = ""; // input のリセット
+  }
+
+  removeTodo(id) {
+    const todoEl = document.getElementById(`todo-${id}`);
+    todoEl.remove();
   }
 
   /**
@@ -120,7 +119,6 @@ class Controller {
       const addedTodoId = todoList.addTodo(task);
       const todo = todoList.getTodo(addedTodoId);
       view.addTodo(todo);
-      console.log(this);
       this.handleCheckTask(todo.id);
     });
   }
@@ -138,7 +136,13 @@ class Controller {
     };
   }
 
-  handleClickDeleteTask() {}
+  handleClickDeleteTask(id) {
+    todoList.removeTodo(id);
+    const buttonEl = document.getElementById(`button-${id}`);
+    buttonEl.onclick = function () {
+      view.removeTodo(id);
+    };
+  }
 }
 
 const formController = new Controller();
