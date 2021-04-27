@@ -1,8 +1,8 @@
-# naive-state-todo
+# naive-mvc-todo
 
-TODO リストを state を使いながらナイーブに実装
+TODO リストを MVC でナイーブに実装
 
-https://sadnessojisan.github.io/naive-state-todo/
+https://sadnessojisan.github.io/naive-mvc-todo/
 
 ## dev
 
