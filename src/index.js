@@ -41,13 +41,21 @@ class View {
    */
   addTodo(todo) {
     const todosEl = document.getElementById("todos");
-    const todoEl = this._createTodoElement(todo.task);
+    const todoEl = this._createTodoElement(todo);
     todosEl.appendChild(todoEl);
   }
 
   // checkbox をいじる
   // react化すると不要
-  check() {}
+  check(id) {
+    const todoEl = document.getElementById(`todo-${id}`);
+    todoEl.className = `checked`;
+  }
+
+  unCheck(id) {
+    const todoEl = document.getElementById(`todo-${id}`);
+    todoEl.className = "";
+  }
 
   resetTodo() {
     const input = document.getElementById("task-input");
@@ -56,24 +64,19 @@ class View {
 
   /**
    *
-   * @param {string} task
+   * @param {id: number, task: string} todo
    * @returns todoのHTML要素
    */
-  _createTodoElement(task) {
+  _createTodoElement(todo) {
+    const { id, task } = todo;
     const todoEl = document.createElement("li");
+    todoEl.id = `todo-${id}`;
     const checkBoxEl = document.createElement("input");
     todoEl.appendChild(checkBoxEl);
     const labelEl = document.createElement("label");
     labelEl.innerText = task;
     checkBoxEl.type = "checkbox";
-    checkBoxEl.onchange = function (e) {
-      const checked = e.target.checked;
-      if (checked) {
-        todoEl.className = `checked`;
-      } else {
-        todoEl.className = "";
-      }
-    };
+    checkBoxEl.id = `checkbox-${todo.id}`;
     todoEl.appendChild(labelEl);
 
     const buttonEl = document.createElement("button");
@@ -92,13 +95,12 @@ const view = new View();
 class Controller {
   setup() {
     this.handleSubmitForm();
-    this.handleCheckTask();
     this.handleClickDeleteTask();
   }
 
   handleSubmitForm() {
     const formEl = document.getElementById("task-send-form");
-    formEl.addEventListener("submit", function (ev) {
+    formEl.addEventListener("submit", (ev) => {
       ev.preventDefault();
 
       const input = document.getElementById("task-input");
@@ -110,10 +112,22 @@ class Controller {
       const addedTodoId = todoList.addTodo(task);
       const todo = todoList.getTodo(addedTodoId);
       view.addTodo(todo);
+      console.log(this);
+      this.handleCheckTask(todo.id);
     });
   }
 
-  handleCheckTask(id) {}
+  handleCheckTask(id) {
+    const checkBoxEl = document.getElementById(`checkbox-${id}`);
+    checkBoxEl.onchange = function (e) {
+      const checked = e.target.checked;
+      if (checked) {
+        view.check(id);
+      } else {
+        view.unCheck(id);
+      }
+    };
+  }
 
   handleClickDeleteTask() {}
 }
