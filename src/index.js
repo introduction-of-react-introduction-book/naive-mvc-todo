@@ -116,9 +116,7 @@ class View {
 
     const buttonEl = document.createElement("button");
     buttonEl.innerText = "削除";
-    buttonEl.onclick = function () {
-      todoEl.remove();
-    };
+    buttonEl.id = `button-${id}`;
     todoEl.appendChild(buttonEl);
 
     return todoEl;
@@ -130,7 +128,6 @@ const view = new View();
 class Controller {
   setup() {
     this.handleSubmitForm();
-    this.handleClickDeleteTask();
   }
 
   /**
@@ -151,6 +148,7 @@ class Controller {
       const todo = todoList.getTodo(addedTodoId);
       view.addTodo(todo);
       this.handleCheckTask(todo.id);
+      this.handleClickDeleteTask(todo.id);
     });
   }
 
