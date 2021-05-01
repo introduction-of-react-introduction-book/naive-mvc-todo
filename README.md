@@ -2,7 +2,7 @@
 
 TODO リストを MVC でナイーブに実装
 
-https://sadnessojisan.github.io/naive-mvc-todo/
+https://introduction-of-react-introduction-book.github.io/naive-mvc-todo/
 
 ## dev
 
