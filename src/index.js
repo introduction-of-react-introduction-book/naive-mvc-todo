@@ -175,10 +175,10 @@ class Controller {
    * @param {*} id TODOのid
    */
   handleClickDeleteTask(id) {
-    todoList.removeTodo(id);
     const buttonEl = document.getElementById(`button-${id}`);
     buttonEl.onclick = function () {
       view.removeTodo(id);
+      todoList.removeTodo(id);
     };
   }
 }
