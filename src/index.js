@@ -149,6 +149,7 @@ class Controller {
       view.addTodo(todo);
       this.handleCheckTask(todo.id);
       this.handleClickDeleteTask(todo.id);
+      view.resetTodo();
     });
   }
 
